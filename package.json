@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-intl-currency-input-dgt": "^0.2.0",
     "react-number-format": "^5.0.1",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.6",
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-intl-currency-input": "^0.2.6"
   }
 }
