@@ -5,16 +5,11 @@ import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-import {
-  Dialog,
-  DialogActions,
-  DialogContentText,
-  Grid,
-} from "@mui/material";
+import { Dialog, DialogActions, DialogContentText, Grid } from "@mui/material";
 
 interface StateValuesInformation {
   inicialCapital: string;
-  fees: number;
+  fees: string;
   time: number;
 }
 
@@ -34,6 +29,14 @@ const CalculatorPage = () => {
 
     setValues({ ...values, inicialCapital: v });
   };
+  const maskCurrencyToFee = (e) => {
+    let f = e.target.value.replace(/\D/g, "");
+    f = (Number(f) / 10 ** 2).toFixed(2) + "";
+    f = f.replace(".", ",");
+    f = f.replace(/\d(?=(\d{3})+\,)/g, "$&.");
+
+    setValues({ ...values, fees: f });
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -42,8 +45,11 @@ const CalculatorPage = () => {
     let inicialCapital = Number(
       values.inicialCapital.replace(".", "").replace(",", ".")
     );
+    let fees = Number(
+      values.fees.replace(".", "").replace(",", ".")
+    );
     let totalAmount: number = 0;
-    totalAmount = inicialCapital * (1 + values.fees / 100) ** values.time;
+    totalAmount = inicialCapital * (1 + fees / 100) ** values.time;
     const result = totalAmount.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
@@ -69,33 +75,28 @@ const CalculatorPage = () => {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-          <FormControl fullWidth variant="outlined">
-            <InputLabel htmlFor="standard-adornment-fees">
-              Juros (a.a)
-            </InputLabel>
+          <FormControl fullWidth variant="standard">
+            <InputLabel htmlFor="fees">Juros (a.a)</InputLabel>
             <Input
-              id="standard-adornment-fees"
               name="fees"
-              value={Number(values.fees) || undefined}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
+              placeholder="Digite a taxa de juros anual"
+              value={values.fees || ""}
+              endAdornment={
+                <InputAdornment position="end">%</InputAdornment>
               }
-              type="number"
-              onChange={(e) => {
-                setValues({ ...values, fees: Number(e.target.value) });
-              }}
+              onChange={maskCurrencyToFee}
             />
           </FormControl>
         </Grid>
 
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-          <FormControl fullWidth variant="outlined">
+          <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="standard-adornment-time">Período</InputLabel>
             <Input
               id="standard-adornment-time"
               name="time"
               value={values.time || undefined}
-              placeholder="Digite o período em meses"
+              placeholder="Digite o período em anos"
               type="number"
               onChange={(e) => {
                 setValues({ ...values, time: Number(e.target.value) });
@@ -122,13 +123,13 @@ const CalculatorPage = () => {
               fontSize: "20px",
             }}
           >
-            <DialogContentText sx={{lineHeight:"30px"}}>O valor total é: </DialogContentText>{" "}
+            <DialogContentText sx={{ lineHeight: "30px" }}>
+              O valor total é:{" "}
+            </DialogContentText>{" "}
             {displayText}
           </DialogContentText>
           <DialogActions>
-            <Button onClick={handleClose} >
-              X
-            </Button>
+            <Button onClick={handleClose}>X</Button>
           </DialogActions>
         </Dialog>
       )}
