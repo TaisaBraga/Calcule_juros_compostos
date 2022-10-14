@@ -10,7 +10,6 @@ import {
   DialogActions,
   DialogContentText,
   Grid,
-  Typography,
 } from "@mui/material";
 
 interface StateValuesInformation {
@@ -58,7 +57,7 @@ const CalculatorPage = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
           <FormControl fullWidth variant="standard">
-            <InputLabel htmlFor="inicialCapital">Inicial Capital</InputLabel>
+            <InputLabel htmlFor="inicialCapital">Valor Inicial</InputLabel>
             <Input
               name="inicialCapital"
               value={values.inicialCapital || ""}
@@ -72,7 +71,7 @@ const CalculatorPage = () => {
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <FormControl fullWidth variant="outlined">
             <InputLabel htmlFor="standard-adornment-fees">
-              Fees (a.a)
+              Juros (a.a)
             </InputLabel>
             <Input
               id="standard-adornment-fees"
@@ -91,7 +90,7 @@ const CalculatorPage = () => {
 
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <FormControl fullWidth variant="outlined">
-            <InputLabel htmlFor="standard-adornment-time">Time</InputLabel>
+            <InputLabel htmlFor="standard-adornment-time">Período</InputLabel>
             <Input
               id="standard-adornment-time"
               name="time"
@@ -110,15 +109,25 @@ const CalculatorPage = () => {
         onClick={handleSubmit}
         sx={{ marginTop: "2rem" }}
       >
-        Submit
+        Calcular
       </Button>
 
       {displayText && (
         <Dialog open={open}>
-          <DialogContentText>{displayText}</DialogContentText>
+          <DialogContentText
+            sx={{
+              padding: "80px",
+              width: "200px",
+              textAlign: "center",
+              fontSize: "20px",
+            }}
+          >
+            <DialogContentText sx={{lineHeight:"30px"}}>O valor total é: </DialogContentText>{" "}
+            {displayText}
+          </DialogContentText>
           <DialogActions>
-            <Button onClick={handleClose} autoFocus>
-              Close
+            <Button onClick={handleClose} >
+              X
             </Button>
           </DialogActions>
         </Dialog>
