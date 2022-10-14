@@ -3,7 +3,21 @@
   padding: 0;
 }
 
-.App{
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (min-width: 1040px) {
+  .App{
+    font-size: 20px;
+  }
+}
+
+.calculator{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,12 +25,36 @@
 }
 
 .App > h1{
-  margin: 2rem;
+  margin-bottom: 2rem;
 }
 
-.App > div{
+.App {
+  border-radius: 5px;
+  padding: 2rem;
+}
+
+.calculator {
   border: 1px solid black;
   border-radius: 5px;
   margin: 2rem;
   padding: 2rem;
+}
+
+@media (min-width: 320px) and (max-width: 450px) {
+  .App{
+    font-size: 10px;
+  }
+
+  .calculator{
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 460px) and (max-width: 1024px) {
+  .App{
+    font-size: 15px;
+  }
+  .calculator{
+    font-size: 5px;
+  }
 }

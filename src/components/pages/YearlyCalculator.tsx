@@ -13,7 +13,7 @@ interface StateValuesInformation {
   time: number;
 }
 
-const CalculatorPage = () => {
+const YearlyCalculator = () => {
   const [values, setValues] = useState<StateValuesInformation>(
     {} as StateValuesInformation
   );
@@ -137,4 +137,4 @@ const CalculatorPage = () => {
   );
 };
 
-export default CalculatorPage;
+export default YearlyCalculator;
