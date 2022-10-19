@@ -9,15 +9,15 @@ import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   let navigate = useNavigate();
-  const [checked, setChecked] = useState("monthly");
+  const [checked, setChecked] = useState("compoundInterest");
 
   const handleChange = (event) => {
-    if (event.target.value === "monthly") {
+    if (event.target.value === "compoundInterest") {
       setChecked(event.target.value);
-      navigate("./monthly");
+      navigate("./compoundInterest");
     }else{
       setChecked(event.target.value);
-      navigate("./yearly");
+      navigate("./SimpleInterestCalculator");
     }
   };
 
@@ -29,17 +29,17 @@ const HomePage = () => {
           sx={{ display: "flex", flexDirection: "row" }}
         >
           <FormControlLabel
-            checked={checked === "monthly"}
-            value="monthly"
+            checked={checked === "compoundInterest"}
+            value="compoundInterest"
             control={<Radio />}
-            label="Taxa Mensal"
+            label="Juros Compostos"
             onChange={handleChange}
           />
           <FormControlLabel
-            checked={checked === "yearly"}
-            value="yearly"
+            checked={checked === "SimpleInterestCalculator"}
+            value="SimpleInterestCalculator"
             control={<Radio />}
-            label="Taxa Anual"
+            label="Juros Simples"
             onChange={handleChange}
           />
         </RadioGroup>

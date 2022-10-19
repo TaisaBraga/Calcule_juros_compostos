@@ -5,12 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-import {
-  Dialog,
-  DialogActions,
-  DialogContentText,
-  Grid,
-} from "@mui/material";
+import { Dialog, DialogActions, DialogContentText, Grid } from "@mui/material";
 
 interface StateValuesInformation {
   inicialCapital: string;
@@ -18,7 +13,7 @@ interface StateValuesInformation {
   time: number;
 }
 
-const MonthlyCalculator = () => {
+const SimpleInterestCalculator = () => {
   const [values, setValues] = useState<StateValuesInformation>(
     {} as StateValuesInformation
   );
@@ -52,22 +47,21 @@ const MonthlyCalculator = () => {
     );
     let fees = Number(values.fees.replace(".", "").replace(",", "."));
     let totalAmount: number = 0;
-    totalAmount = inicialCapital * (1 + fees / 100) ** values.time;
-    const result = totalAmount.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
+    let result: number = 0
+    totalAmount = inicialCapital * ( fees / 100) * values.time;
+    result = inicialCapital + totalAmount;
+    const sum: string = result.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      })
     setOpen(true);
-    setDisplayText(result);
+    setDisplayText(sum);
   };
-
   return (
-    <Box
-      sx={{width: 500}}
-    >
-      <Grid container spacing={2} >
+    <Box sx={{ width: 500 }}>
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="inicialCapital">Valor Inicial</InputLabel>
             <Input
               name="inicialCapital"
@@ -81,7 +75,7 @@ const MonthlyCalculator = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <FormControl fullWidth variant="standard">
-            <InputLabel htmlFor="fees">Juros (a.m)</InputLabel>
+            <InputLabel htmlFor="fees">Juros</InputLabel>
             <Input
               name="fees"
               placeholder="Digite a taxa de juros mensal"
@@ -140,4 +134,4 @@ const MonthlyCalculator = () => {
   );
 };
 
-export default MonthlyCalculator;
+export default SimpleInterestCalculator;
