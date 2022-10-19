@@ -4,31 +4,43 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   let navigate = useNavigate();
-  
+  const [checked, setChecked] = useState("monthly");
+
+  const handleChange = (event) => {
+    if (event.target.value === "monthly") {
+      setChecked(event.target.value);
+      navigate("./monthly");
+    }else{
+      setChecked(event.target.value);
+      navigate("./yearly");
+    }
+  };
+
   return (
     <div>
-      <FormControl >
+      <FormControl>
         <RadioGroup
-          defaultValue="Mensal"
           name="radio-buttons-group"
-          sx={{display:'flex', flexDirection: 'row'}}
+          sx={{ display: "flex", flexDirection: "row" }}
         >
           <FormControlLabel
+            checked={checked === "monthly"}
             value="monthly"
             control={<Radio />}
             label="Taxa Mensal"
-            onChange={() => navigate('/monthly')}
+            onChange={handleChange}
           />
           <FormControlLabel
+            checked={checked === "yearly"}
             value="yearly"
             control={<Radio />}
             label="Taxa Anual"
-            onChange={() => navigate('/yearly')}
-            
+            onChange={handleChange}
           />
         </RadioGroup>
       </FormControl>
@@ -36,4 +48,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage
+export default HomePage;

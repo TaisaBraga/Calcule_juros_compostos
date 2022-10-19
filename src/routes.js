@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Monthly from "./components/pages/MonthlyCalculator";
 import Yearly from "./components/pages/YearlyCalculator";
 

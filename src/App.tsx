@@ -1,7 +1,5 @@
 import "./App.css";
 import HomePage from "./components/pages/HomePage";
-import MonthlyCalculator from "./components/pages/MonthlyCalculator";
-import YearlyCalculator from "./components/pages/YearlyCalculator";
 import GetRoutes from "./routes";
 
 function App() {
