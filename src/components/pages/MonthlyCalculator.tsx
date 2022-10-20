@@ -22,11 +22,11 @@ const MonthlyCalculator = () => {
   const [values, setValues] = useState<StateValuesInformation>(
     {} as StateValuesInformation
   );
-  const [displayText, setDisplayText] = useState("");
+  const [displayText, setDisplayText] = useState<string>("");
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const maskCurrency = (e) => {
+  const maskCurrency = (e: any): void => {
     let v = e.target.value.replace(/\D/g, "");
     v = (Number(v) / 10 ** 2).toFixed(2) + "";
     v = v.replace(".", ",");
@@ -34,7 +34,7 @@ const MonthlyCalculator = () => {
 
     setValues({ ...values, inicialCapital: v });
   };
-  const maskCurrencyToFee = (e) => {
+  const maskCurrencyToFee = (e: any): void => {
     let f = e.target.value.replace(/\D/g, "");
     f = (Number(f) / 10 ** 2).toFixed(2) + "";
     f = f.replace(".", ",");
@@ -42,7 +42,7 @@ const MonthlyCalculator = () => {
 
     setValues({ ...values, fees: f });
   };
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
   };
 
@@ -53,7 +53,7 @@ const MonthlyCalculator = () => {
     let fees = Number(values.fees.replace(".", "").replace(",", "."));
     let totalAmount: number = 0;
     totalAmount = inicialCapital * (1 + fees / 100) ** values.time;
-    const result = totalAmount.toLocaleString("pt-BR", {
+    const result: string = totalAmount.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     });

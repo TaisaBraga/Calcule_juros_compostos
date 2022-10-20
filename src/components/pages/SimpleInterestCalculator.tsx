@@ -17,11 +17,11 @@ const SimpleInterestCalculator = () => {
   const [values, setValues] = useState<StateValuesInformation>(
     {} as StateValuesInformation
   );
-  const [displayText, setDisplayText] = useState("");
+  const [displayText, setDisplayText] = useState<string>("");
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const maskCurrency = (e) => {
+  const maskCurrency = (e: any): void => {
     let v = e.target.value.replace(/\D/g, "");
     v = (Number(v) / 10 ** 2).toFixed(2) + "";
     v = v.replace(".", ",");
@@ -29,7 +29,7 @@ const SimpleInterestCalculator = () => {
 
     setValues({ ...values, inicialCapital: v });
   };
-  const maskCurrencyToFee = (e) => {
+  const maskCurrencyToFee = (e: any): void => {
     let f = e.target.value.replace(/\D/g, "");
     f = (Number(f) / 10 ** 2).toFixed(2) + "";
     f = f.replace(".", ",");
@@ -37,7 +37,7 @@ const SimpleInterestCalculator = () => {
 
     setValues({ ...values, fees: f });
   };
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
   };
 

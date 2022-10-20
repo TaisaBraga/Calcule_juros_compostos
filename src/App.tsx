@@ -1,5 +1,5 @@
 import "./App.css";
-import HomePage from "./components/pages/HomePage";
+import InterestOptions from "./components/pages/InterestOptions";
 import GetRoutes from "./routes";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <h1>Calculadora de Juros Compostos</h1>
       <div>
-        <HomePage />
+        <InterestOptions />
       </div>
       <div className="calculator">
         <GetRoutes />

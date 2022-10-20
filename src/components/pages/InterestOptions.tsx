@@ -7,11 +7,11 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const HomePage = () => {
+const InterestOptions = () => {
   let navigate = useNavigate();
-  const [checked, setChecked] = useState("compoundInterest");
+  const [checked, setChecked] = useState<string>("compoundInterest");
 
-  const handleChange = (event) => {
+  const handleChange = (event: any): void =>   {
     if (event.target.value === "compoundInterest") {
       setChecked(event.target.value);
       navigate("./compoundInterest");
@@ -48,4 +48,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default InterestOptions;
