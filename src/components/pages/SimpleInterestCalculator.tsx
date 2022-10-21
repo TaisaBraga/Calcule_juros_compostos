@@ -25,7 +25,7 @@ const SimpleInterestCalculator = () => {
     let v = e.target.value.replace(/\D/g, "");
     v = (Number(v) / 10 ** 2).toFixed(2) + "";
     v = v.replace(".", ",");
-    v = v.replace(/\d(?=(\d{3})+\,)/g, "$&.");
+    v = v.replace(/\d(?=(\d{3})+)/g, "$&.");
 
     setValues({ ...values, inicialCapital: v });
   };
@@ -33,7 +33,7 @@ const SimpleInterestCalculator = () => {
     let f = e.target.value.replace(/\D/g, "");
     f = (Number(f) / 10 ** 2).toFixed(2) + "";
     f = f.replace(".", ",");
-    f = f.replace(/\d(?=(\d{3})+\,)/g, "$&.");
+    f = f.replace(/\d(?=(\d{3})+)/g, "$&.");
 
     setValues({ ...values, fees: f });
   };
@@ -92,7 +92,7 @@ const SimpleInterestCalculator = () => {
             <Input
               id="standard-adornment-time"
               name="time"
-              value={values.time || undefined}
+              value={values.time || ""}
               placeholder="Digite o período em meses"
               type="number"
               onChange={(e) => {
@@ -106,6 +106,7 @@ const SimpleInterestCalculator = () => {
         variant="outlined"
         onClick={handleSubmit}
         sx={{ marginTop: "2rem" }}
+        disabled={!(values.fees && values.inicialCapital && values.time)}
       >
         Calcular
       </Button>

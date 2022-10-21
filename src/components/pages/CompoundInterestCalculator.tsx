@@ -5,12 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-import {
-  Dialog,
-  DialogActions,
-  DialogContentText,
-  Grid,
-} from "@mui/material";
+import { Dialog, DialogActions, DialogContentText, Grid } from "@mui/material";
 
 interface StateValuesInformation {
   inicialCapital: string;
@@ -18,19 +13,18 @@ interface StateValuesInformation {
   time: number;
 }
 
-const MonthlyCalculator = () => {
+const  CompoundInterestCalculator = () => {
   const [values, setValues] = useState<StateValuesInformation>(
     {} as StateValuesInformation
   );
   const [displayText, setDisplayText] = useState<string>("");
-
   const [open, setOpen] = useState<boolean>(false);
 
   const maskCurrency = (e: any): void => {
     let v = e.target.value.replace(/\D/g, "");
     v = (Number(v) / 10 ** 2).toFixed(2) + "";
     v = v.replace(".", ",");
-    v = v.replace(/\d(?=(\d{3})+\,)/g, "$&.");
+    v = v.replace(/\d(?=(\d{3})+)/g, "$&.");
 
     setValues({ ...values, inicialCapital: v });
   };
@@ -38,7 +32,7 @@ const MonthlyCalculator = () => {
     let f = e.target.value.replace(/\D/g, "");
     f = (Number(f) / 10 ** 2).toFixed(2) + "";
     f = f.replace(".", ",");
-    f = f.replace(/\d(?=(\d{3})+\,)/g, "$&.");
+    f = f.replace(/\d(?=(\d{3})+)/g, "$&.");
 
     setValues({ ...values, fees: f });
   };
@@ -47,10 +41,10 @@ const MonthlyCalculator = () => {
   };
 
   const handleSubmit = (): void => {
-    let inicialCapital = Number(
+    let inicialCapital: number = Number(
       values.inicialCapital.replace(".", "").replace(",", ".")
     );
-    let fees = Number(values.fees.replace(".", "").replace(",", "."));
+    let fees: number = Number(values.fees.replace(".", "").replace(",", "."));
     let totalAmount: number = 0;
     totalAmount = inicialCapital * (1 + fees / 100) ** values.time;
     const result: string = totalAmount.toLocaleString("pt-BR", {
@@ -62,12 +56,10 @@ const MonthlyCalculator = () => {
   };
 
   return (
-    <Box
-      sx={{width: 500}}
-    >
-      <Grid container spacing={2} >
+    <Box sx={{ width: 500 }}>
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="inicialCapital">Valor Inicial</InputLabel>
             <Input
               name="inicialCapital"
@@ -98,7 +90,7 @@ const MonthlyCalculator = () => {
             <Input
               id="standard-adornment-time"
               name="time"
-              value={values.time || undefined}
+              value={values.time || ""}
               placeholder="Digite o período em meses"
               type="number"
               onChange={(e) => {
@@ -112,6 +104,7 @@ const MonthlyCalculator = () => {
         variant="outlined"
         onClick={handleSubmit}
         sx={{ marginTop: "2rem" }}
+        disabled={!(values.fees && values.inicialCapital && values.time)}
       >
         Calcular
       </Button>
@@ -126,10 +119,7 @@ const MonthlyCalculator = () => {
               fontSize: "20px",
             }}
           >
-            <DialogContentText sx={{ lineHeight: "30px" }}>
-              O valor total é:{" "}
-            </DialogContentText>{" "}
-            {displayText}
+            O valor total é: {displayText}
           </DialogContentText>
           <DialogActions>
             <Button onClick={handleClose}>X</Button>
@@ -140,4 +130,4 @@ const MonthlyCalculator = () => {
   );
 };
 
-export default MonthlyCalculator;
+export default  CompoundInterestCalculator;

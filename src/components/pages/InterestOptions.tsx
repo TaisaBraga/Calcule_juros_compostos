@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 
 const InterestOptions = () => {
   let navigate = useNavigate();
-  const [checked, setChecked] = useState<string>("compoundInterest");
+  const [checked, setChecked] = useState<string>("CompoundInterestCalculator");
 
   const handleChange = (event: any): void =>   {
-    if (event.target.value === "compoundInterest") {
+    if (event.target.value === "CompoundInterestCalculator") {
       setChecked(event.target.value);
-      navigate("./compoundInterest");
+      navigate("./");
     }else{
       setChecked(event.target.value);
       navigate("./SimpleInterestCalculator");
@@ -29,8 +29,8 @@ const InterestOptions = () => {
           sx={{ display: "flex", flexDirection: "row" }}
         >
           <FormControlLabel
-            checked={checked === "compoundInterest"}
-            value="compoundInterest"
+            checked={checked === "CompoundInterestCalculator"}
+            value="CompoundInterestCalculator"
             control={<Radio />}
             label="Juros Compostos"
             onChange={handleChange}
