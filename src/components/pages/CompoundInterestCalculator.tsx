@@ -56,9 +56,9 @@ const  CompoundInterestCalculator = () => {
   };
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box >
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+        <Grid item xs={10} sm={10} md={6} lg={6} xl={6}>
           <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="inicialCapital">Valor Inicial</InputLabel>
             <Input
@@ -71,7 +71,7 @@ const  CompoundInterestCalculator = () => {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+        <Grid item xs={10} sm={10} md={3} lg={3} xl={3}>
           <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="fees">Juros (a.m)</InputLabel>
             <Input
@@ -84,7 +84,7 @@ const  CompoundInterestCalculator = () => {
           </FormControl>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+        <Grid item xs={10} sm={10} md={3} lg={3} xl={3}>
           <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="standard-adornment-time">Período</InputLabel>
             <Input

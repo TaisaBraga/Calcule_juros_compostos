@@ -6,11 +6,13 @@ function App() {
   return (
     <div className="App">
       <h1>Calculadora de Juros Compostos</h1>
-      <div>
-        <InterestOptions />
-      </div>
-      <div className="calculator">
-        <GetRoutes />
+      <div className="container">
+        <div className="interestOptions">
+          <InterestOptions />
+        </div>
+        <div className="calculator">
+          <GetRoutes />
+        </div>
       </div>
     </div>
   );
