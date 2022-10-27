@@ -25,7 +25,7 @@ const SimpleInterestCalculator = () => {
     let v = e.target.value.replace(/\D/g, "");
     v = (Number(v) / 10 ** 2).toFixed(2) + "";
     v = v.replace(".", ",");
-    v = v.replace(/\d(?=(\d{3})+)/g, "$&.");
+    v = v.replace(/\d(?=(\d{3})+\,)/g, "$&.");
 
     setValues({ ...values, inicialCapital: v });
   };
@@ -33,7 +33,7 @@ const SimpleInterestCalculator = () => {
     let f = e.target.value.replace(/\D/g, "");
     f = (Number(f) / 10 ** 2).toFixed(2) + "";
     f = f.replace(".", ",");
-    f = f.replace(/\d(?=(\d{3})+)/g, "$&.");
+    f = f.replace(/\d(?=(\d{3})+\,)/g, "$&.");
 
     setValues({ ...values, fees: f });
   };

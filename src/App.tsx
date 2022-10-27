@@ -1,5 +1,6 @@
 import "./App.css";
 import InterestOptions from "./components/pages/InterestOptions";
+import PocToDropSelect from "./components/pages/PocToDropSelect";
 import GetRoutes from "./routes";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <div className="container">
         <div className="interestOptions">
           <InterestOptions />
+          <PocToDropSelect />
         </div>
         <div className="calculator">
           <GetRoutes />
