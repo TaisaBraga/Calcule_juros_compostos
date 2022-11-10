@@ -5,16 +5,7 @@ import InputLabel from '@mui/material/InputLabel'
 import Input from '@mui/material/Input'
 import InputAdornment from '@mui/material/InputAdornment'
 import Button from '@mui/material/Button'
-import {
-  Dialog,
-  DialogActions,
-  DialogContentText,
-  Grid,
-  MenuItem,
-  Select,
-  SelectChangeEvent
-} from '@mui/material'
-import PocToDropSelect from './PocToDropSelect'
+import { Dialog, DialogActions, DialogContentText, Grid } from '@mui/material'
 
 interface StateValuesInformation {
   inicialCapital: string

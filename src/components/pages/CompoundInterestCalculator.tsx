@@ -21,12 +21,21 @@ interface StateValuesInformation {
   time: number
 }
 
+export enum PeriodOfTime {
+  MONTH = 'month',
+  MONTHLY = 'monthly',
+  YEAR = 'year',
+  YEARLY = 'yearly'
+}
+
 const CompoundInterestCalculator = () => {
   const [values, setValues] = useState<StateValuesInformation>(
     {} as StateValuesInformation
   )
   const [displayText, setDisplayText] = useState<string>('')
   const [open, setOpen] = useState<boolean>(false)
+  const [feesValue, setFeesValue] = useState<string>('')
+  const [timeValue, setTimeValue] = useState<string>('')
 
   const maskCurrency = (e: any): void => {
     let v = e.target.value.replace(/\D/g, '')
@@ -47,14 +56,9 @@ const CompoundInterestCalculator = () => {
   const handleClose = (): void => {
     setOpen(false)
   }
-
-  const [feesValue, setFeesValue] = useState<string>('')
-  const [timeValue, setTimeValue] = useState<string>('')
-
   const handleChangeFees = (event: SelectChangeEvent): void => {
     setFeesValue(event.target.value)
   }
-
   const handleChangeTime = (event: SelectChangeEvent): void => {
     setTimeValue(event.target.value)
   }
@@ -67,15 +71,22 @@ const CompoundInterestCalculator = () => {
     let totalAmount: number = 0
     let feesChanged: number = 0
     if (
-      (feesValue === 'mensal' && timeValue === 'mensal') ||
-      (feesValue === 'anual' && timeValue === 'anual')
+      (feesValue === PeriodOfTime.MONTHLY &&
+        timeValue === PeriodOfTime.MONTH) ||
+      (feesValue === PeriodOfTime.YEARLY && timeValue === PeriodOfTime.YEAR)
     ) {
       totalAmount = inicialCapital * (1 + fees / 100) ** values.time
-    } else if (feesValue === 'anual' && timeValue === 'meses') {
+    } else if (
+      feesValue === PeriodOfTime.YEARLY &&
+      timeValue === PeriodOfTime.MONTH
+    ) {
       let aux = Math.pow(1 + fees / 100, 1 / 12) - 1
       feesChanged = aux * 100
       totalAmount = inicialCapital * (1 + feesChanged / 100) ** values.time
-    } else if (feesValue === 'mensal' && timeValue === 'anos') {
+    } else if (
+      feesValue === PeriodOfTime.MONTHLY &&
+      timeValue === PeriodOfTime.YEAR
+    ) {
       let aux = Math.pow(1 + fees / 100, 12) - 1
       feesChanged = aux * 100
       totalAmount = inicialCapital * (1 + feesChanged / 100) ** values.time
@@ -114,16 +125,17 @@ const CompoundInterestCalculator = () => {
               endAdornment={<InputAdornment position="end">%</InputAdornment>}
               onChange={maskCurrencyToFee}
             />
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={feesValue}
-              onChange={handleChangeFees}
-            >
-              <MenuItem value={'anual'}>Anual</MenuItem>
-              <MenuItem value={'mensal'}>Mensal</MenuItem>
-            </Select>
           </FormControl>
+          <Select
+            sx={{ minWidth: 120 }}
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={feesValue}
+            onChange={handleChangeFees}
+          >
+            <MenuItem value={PeriodOfTime.YEARLY}>Anual</MenuItem>
+            <MenuItem value={PeriodOfTime.MONTHLY}>Mensal</MenuItem>
+          </Select>
         </Grid>
 
         <Grid item xs={10} sm={10} md={3} lg={3} xl={3}>
@@ -139,16 +151,16 @@ const CompoundInterestCalculator = () => {
                 setValues({ ...values, time: Number(e.target.value) })
               }}
             />
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={timeValue}
-              onChange={handleChangeTime}
-            >
-              <MenuItem value={'anos'}>Anos</MenuItem>
-              <MenuItem value={'meses'}>Meses</MenuItem>
-            </Select>
           </FormControl>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={timeValue}
+            onChange={handleChangeTime}
+          >
+            <MenuItem value={PeriodOfTime.YEAR}>Anos</MenuItem>
+            <MenuItem value={PeriodOfTime.MONTH}>Meses</MenuItem>
+          </Select>
         </Grid>
       </Grid>
       <Button
