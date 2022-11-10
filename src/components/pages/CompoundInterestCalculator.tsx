@@ -71,10 +71,13 @@ const CompoundInterestCalculator = () => {
       (feesValue === 'anual' && timeValue === 'anual')
     ) {
       totalAmount = inicialCapital * (1 + fees / 100) ** values.time
-    } else if (feesValue === 'anual' && timeValue === 'mensal') {
+    } else if (feesValue === 'anual' && timeValue === 'meses') {
       let aux = Math.pow(1 + fees / 100, 1 / 12) - 1
       feesChanged = aux * 100
-      console.log(feesChanged)
+      totalAmount = inicialCapital * (1 + feesChanged / 100) ** values.time
+    } else if (feesValue === 'mensal' && timeValue === 'anos') {
+      let aux = Math.pow(1 + fees / 100, 12) - 1
+      feesChanged = aux * 100
       totalAmount = inicialCapital * (1 + feesChanged / 100) ** values.time
     }
     let result: string = totalAmount.toLocaleString('pt-BR', {
@@ -142,8 +145,8 @@ const CompoundInterestCalculator = () => {
               value={timeValue}
               onChange={handleChangeTime}
             >
-              <MenuItem value={'anual'}>Anos</MenuItem>
-              <MenuItem value={'mensal'}>Meses</MenuItem>
+              <MenuItem value={'anos'}>Anos</MenuItem>
+              <MenuItem value={'meses'}>Meses</MenuItem>
             </Select>
           </FormControl>
         </Grid>
