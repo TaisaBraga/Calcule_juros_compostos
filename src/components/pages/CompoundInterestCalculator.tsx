@@ -65,13 +65,17 @@ const CompoundInterestCalculator = () => {
     )
     let fees: number = Number(values.fees.replace('.', '').replace(',', '.'))
     let totalAmount: number = 0
+    let feesChanged: number = 0
     if (
       (feesValue === 'mensal' && timeValue === 'mensal') ||
       (feesValue === 'anual' && timeValue === 'anual')
     ) {
       totalAmount = inicialCapital * (1 + fees / 100) ** values.time
-    } else if(feesValue === 'mensal' && timeValue === 'anual'){
-      
+    } else if (feesValue === 'anual' && timeValue === 'mensal') {
+      let aux = Math.pow(1 + fees / 100, 1 / 12) - 1
+      feesChanged = aux * 100
+      console.log(feesChanged)
+      totalAmount = inicialCapital * (1 + feesChanged / 100) ** values.time
     }
     let result: string = totalAmount.toLocaleString('pt-BR', {
       style: 'currency',
@@ -99,7 +103,7 @@ const CompoundInterestCalculator = () => {
         </Grid>
         <Grid item xs={10} sm={10} md={3} lg={3} xl={3}>
           <FormControl fullWidth variant="standard">
-            <InputLabel htmlFor="fees">Juros (a.m)</InputLabel>
+            <InputLabel htmlFor="fees">Juros</InputLabel>
             <Input
               name="fees"
               placeholder="Digite a taxa de juros mensal"
@@ -138,8 +142,8 @@ const CompoundInterestCalculator = () => {
               value={timeValue}
               onChange={handleChangeTime}
             >
-              <MenuItem value={'anual'}>Anual</MenuItem>
-              <MenuItem value={'mensal'}>Mensal</MenuItem>
+              <MenuItem value={'anual'}>Anos</MenuItem>
+              <MenuItem value={'mensal'}>Meses</MenuItem>
             </Select>
           </FormControl>
         </Grid>
